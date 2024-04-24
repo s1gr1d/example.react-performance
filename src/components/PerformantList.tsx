@@ -47,11 +47,11 @@ export const PerformantList: FC = () => {
 			/>
 			{items.length === 0 && <p>Loading...</p>}
 			{items.length > 0 && filteredItems.length === 0 && <p>No items found</p>}
-			<div>
+			<ul>
 				{deferredItems.map((item) => (
 					<MemoizedItem key={item.id} {...item} />
 				))}
-			</div>
+			</ul>
 		</>
 	);
 };

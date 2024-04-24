@@ -1,5 +1,5 @@
-import { TriggerReRender } from "./components/TriggerReRender.tsx";
 import { ProfilerOnRenderCallback, useState } from "react";
+import { TriggerReRender } from "../components/TriggerReRender.tsx";
 
 performance.mark("start");
 performance.mark("end");

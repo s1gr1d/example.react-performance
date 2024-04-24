@@ -7,5 +7,5 @@ export type ItemProps = {
 
 export const Item: FC<ItemProps> = ({ id, name }) => {
 	// console.log(`Rendering Item ${id}`);
-	return <div key={id}>{name}</div>;
+	return <li key={id}>{name}</li>;
 };

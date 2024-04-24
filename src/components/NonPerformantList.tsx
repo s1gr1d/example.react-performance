@@ -1,4 +1,4 @@
-import { useState, useEffect, FC, ProfilerOnRenderCallback } from "react";
+import { useState, useEffect, FC } from "react";
 import { dummyApi, DummyData } from "../utils/dummyApi";
 import { Item, ItemProps } from "./Item.tsx";
 
@@ -30,35 +30,18 @@ export const NonPerformantList: FC = () => {
 			{items.length === 0 && <p>Loading...</p>}
 			{items.length > 0 && filteredItems.length === 0 && <p>No items found</p>}
 
-			<div>
+			<ul>
 				{filteredItems.map((item) => (
 					<Item key={item.id} {...item} />
 				))}
-			</div>
+			</ul>
 		</>
 	);
 };
 
 // -----------------------------------------------------------------------------
 
-const onRender: ProfilerOnRenderCallback = (
-	id, // the "id" prop of the Profiler tree that has just committed
-	phase, // either "mount" (if the tree just mounted) or "update" (if it re-rendered)
-	actualDuration, // time spent rendering the committed update
-	baseDuration, // estimated milliseconds to render the entire subtree without memoization
-	startTime, // when React began rendering the current update
-	commitTime // when React committed the current update
-) => {
-	console.table({
-		id,
-		phase,
-		actualDuration,
-		baseDuration,
-		startTime,
-		commitTime
-	});
-};
-
+/*
 function measureInteraction() {
 	const startTimestamp = performance.now();
 
@@ -69,6 +52,8 @@ function measureInteraction() {
 		}
 	};
 }
+
+ */
 
 /* inside onChange
 	const interaction = measureInteraction();
