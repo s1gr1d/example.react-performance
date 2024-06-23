@@ -38,3 +38,8 @@ export const onRender: ProfilerOnRenderCallback = (
 		commitTime
 	});
 };
+
+/* inside onChange
+	const interaction = measureInteractionWithMark();
+	requestAnimationFrame(() => setTimeout(() => interaction.end()));
+*/

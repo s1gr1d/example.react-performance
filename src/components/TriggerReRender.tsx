@@ -9,7 +9,7 @@ export const TriggerReRender: React.FC = () => {
 
 	return (
 		<div>
-			<button onClick={handleClick}>{counter} state change (child)</button>
+			<button onClick={handleClick}>Count {counter} (child)</button>
 		</div>
 	);
 };
