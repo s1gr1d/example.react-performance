@@ -1,4 +1,4 @@
-import { useState, useEffect, FC } from "react";
+import { useState, useEffect, FC, useMemo } from "react";
 import { dummyApi, DummyData } from "../utils/dummyApi";
 import { Item, ItemProps } from "./Item.tsx";
 import { ListInfo } from "./ListInfo.tsx";
@@ -23,7 +23,9 @@ export const ImprovingList: FC = () => {
 		});
 	}, []);
 
-	const filteredItems = filterItems(allItems, searchTerm);
+	const filteredItems = useMemo(() => {
+		return filterItems(allItems, searchTerm);
+	}, [searchTerm, allItems]);
 
 	// Counter Button State
 	const [counter, setCounter] = useState(0);
