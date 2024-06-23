@@ -1,8 +1,10 @@
-import { useState, FC } from "react";
+import { useState, FC, memo } from "react";
 import { measureInteractionWithMark } from "../utils/measureInteraction.ts";
 import { useDebounce } from "../hooks/debounce.ts";
 import { SearchResults } from "./SearchResults.tsx";
 import { CounterButton } from "./CounterButton.tsx";
+
+const MemoizedSearchResults = memo(SearchResults);
 
 export const ImprovingList: FC = () => {
 	const [searchTerm, setSearchTerm] = useState<string>("");
@@ -26,7 +28,7 @@ export const ImprovingList: FC = () => {
 				}}
 			/>
 
-			<SearchResults debouncedSearchTerm={debouncedSearchTerm} />
+			<MemoizedSearchResults debouncedSearchTerm={debouncedSearchTerm} />
 		</>
 	);
 };
