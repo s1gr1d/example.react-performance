@@ -11,6 +11,9 @@ function App() {
 					<li>
 						<Link to={`non-performant`}>Non-Performant</Link>
 					</li>
+					<li>
+						<Link to={`improving-in-progress`}>Improving in progress</Link>
+					</li>
 				</ul>
 			</nav>
 		</>

@@ -5,6 +5,7 @@ import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { PerformantList } from "./components/PerformantList.tsx";
 import { NonPerformantList } from "./components/NonPerformantList.tsx";
+import { ImprovingList } from "./components/ImprovingList.tsx";
 import { Page } from "./components/Page.tsx";
 
 const router = createBrowserRouter([
@@ -29,6 +30,14 @@ const router = createBrowserRouter([
 		element: (
 			<Page title="Non-Performant">
 				<NonPerformantList />
+			</Page>
+		)
+	},
+	{
+		path: "improving-in-progress",
+		element: (
+			<Page title="Improving">
+				<ImprovingList />
 			</Page>
 		)
 	}
