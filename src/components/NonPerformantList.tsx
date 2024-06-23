@@ -52,8 +52,8 @@ export const NonPerformantList: FC = () => {
 			<ListInfo allItems={allItems} filteredItems={filteredItems} />
 
 			<ul>
-				{filteredItems.map((item, index) => (
-					<Item key={index} {...item} />
+				{filteredItems.map((item) => (
+					<Item key={item.id} {...item} />
 				))}
 			</ul>
 		</>
