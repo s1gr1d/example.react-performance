@@ -13,7 +13,7 @@ const filterItems = (allItems: ItemProps[], searchTerm: string) => {
 	return filtered;
 };
 
-export const ImprovingList: FC = () => {
+export const NonPerformantList: FC = () => {
 	const [allItems, setAllItems] = useState<ItemProps[]>([]);
 	const [searchTerm, setSearchTerm] = useState<string>("");
 
