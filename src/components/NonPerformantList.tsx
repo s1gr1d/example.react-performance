@@ -1,4 +1,4 @@
-import { useState, useEffect, FC, useMemo } from "react";
+import { useState, useEffect, FC } from "react";
 import { dummyApi, DummyData } from "../utils/dummyApi";
 import { Item, ItemProps } from "./Item.tsx";
 import { ListInfo } from "./ListInfo.tsx";

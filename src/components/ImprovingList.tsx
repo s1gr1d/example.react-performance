@@ -3,6 +3,7 @@ import { dummyApi, DummyData } from "../utils/dummyApi";
 import { Item, ItemProps } from "./Item.tsx";
 import { ListInfo } from "./ListInfo.tsx";
 import { measureInteractionWithMark } from "../utils/measureInteraction.ts";
+import { useDebounce } from "../hooks/debounce.ts";
 
 const filterItems = (allItems: ItemProps[], searchTerm: string) => {
 	const interaction = measureInteractionWithMark("Filter Items");
@@ -23,9 +24,11 @@ export const NonPerformantList: FC = () => {
 		});
 	}, []);
 
+	const debouncedSearchTerm = useDebounce(searchTerm, 500);
+
 	const filteredItems = useMemo(() => {
-		return filterItems(allItems, searchTerm);
-	}, [searchTerm, allItems]);
+		return filterItems(allItems, debouncedSearchTerm);
+	}, [debouncedSearchTerm, allItems]);
 
 	// Counter Button State
 	const [counter, setCounter] = useState(0);
