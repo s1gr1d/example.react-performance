@@ -1,4 +1,4 @@
-import { useState, useEffect, FC, useMemo } from "react";
+import { useState, useEffect, FC, useMemo, memo } from "react";
 import { dummyApi, DummyData } from "../utils/dummyApi";
 import { Item, ItemProps } from "./Item.tsx";
 import { ListInfo } from "./ListInfo.tsx";
@@ -13,6 +13,8 @@ const filterItems = (allItems: ItemProps[], searchTerm: string) => {
 	interaction.end();
 	return filtered;
 };
+
+const MemoizedItem = memo(Item);
 
 export const ImprovingList: FC = () => {
 	const [allItems, setAllItems] = useState<ItemProps[]>([]);
@@ -58,7 +60,7 @@ export const ImprovingList: FC = () => {
 
 			<ul>
 				{filteredItems.map((item) => (
-					<Item key={item.id} {...item} />
+					<MemoizedItem key={item.id} {...item} />
 				))}
 			</ul>
 		</>
