@@ -1,5 +1,5 @@
 import { ProfilerOnRenderCallback, useState } from "react";
-import { TriggerReRender } from "../components/TriggerReRender.tsx";
+import { CounterButton } from "../components/CounterButton.tsx";
 
 performance.mark("start");
 performance.mark("end");
@@ -16,7 +16,7 @@ export const Snippets = () => {
 				<button onClick={handleClick}> {counter} state change (local)</button>
 			</div>
 
-			<TriggerReRender />
+			<CounterButton />
 		</>
 	);
 };

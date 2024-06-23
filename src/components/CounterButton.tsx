@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export const TriggerReRender: React.FC = () => {
+export const CounterButton: React.FC = () => {
 	const [counter, setCounter] = useState(0);
 
 	const handleClick = () => {
