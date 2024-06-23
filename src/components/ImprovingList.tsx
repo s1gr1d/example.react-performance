@@ -1,6 +1,5 @@
-import { useState, FC, memo } from "react";
+import { useState, FC, memo, useDeferredValue } from "react";
 import { measureInteractionWithMark } from "../utils/measureInteraction.ts";
-import { useDebounce } from "../hooks/debounce.ts";
 import { SearchResults } from "./SearchResults.tsx";
 import { CounterButton } from "./CounterButton.tsx";
 
@@ -9,7 +8,8 @@ const MemoizedSearchResults = memo(SearchResults);
 export const ImprovingList: FC = () => {
 	const [searchTerm, setSearchTerm] = useState<string>("");
 
-	const debouncedSearchTerm = useDebounce(searchTerm, 500);
+	const deferredSearchTerm = useDeferredValue(searchTerm);
+	const isDeferring = deferredSearchTerm !== searchTerm;
 
 	return (
 		<>
@@ -28,7 +28,9 @@ export const ImprovingList: FC = () => {
 				}}
 			/>
 
-			<MemoizedSearchResults debouncedSearchTerm={debouncedSearchTerm} />
+			<div>{isDeferring ? "Deferring..." : "Done"}</div>
+
+			<MemoizedSearchResults debouncedSearchTerm={deferredSearchTerm} />
 		</>
 	);
 };
