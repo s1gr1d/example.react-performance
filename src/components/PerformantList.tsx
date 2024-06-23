@@ -20,10 +20,12 @@ export const PerformantList: FC = () => {
 	const debouncedSearchTerm = useDebounce(searchTerm, 500);
 
 	const filteredItems = useMemo(() => {
-		// console.log("Filtering: ", debouncedSearchTerm);
-		return allItems.filter((item) =>
+		const interaction = measureInteractionWithMark("Filter Items");
+		const filtered = allItems.filter((item) =>
 			item.name.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
 		);
+		requestAnimationFrame(() => setTimeout(() => interaction.end()));
+		return filtered;
 	}, [debouncedSearchTerm, allItems]);
 
 	return (
@@ -36,7 +38,7 @@ export const PerformantList: FC = () => {
 				value={searchTerm}
 				onChange={(e) => {
 					setSearchTerm(e.target.value);
-					const interaction = measureInteractionWithMark();
+					const interaction = measureInteractionWithMark("Search Item");
 					requestAnimationFrame(() => setTimeout(() => interaction.end()));
 				}}
 			/>

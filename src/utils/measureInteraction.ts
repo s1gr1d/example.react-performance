@@ -9,14 +9,17 @@ export function measureInteraction() {
 	};
 }
 
-export function measureInteractionWithMark() {
-	performance.mark("start");
+export function measureInteractionWithMark(name: string) {
+	const startName = `start-${name}`;
+	const endName = `end-${name}`;
+
+	performance.mark(startName);
 
 	return {
 		end() {
-			performance.mark("end");
-			const measure = performance.measure("Search Item", "start", "end");
-			console.log(`The interaction took ${measure.duration} ms`);
+			performance.mark(endName);
+			const measure = performance.measure(name, startName, endName);
+			console.log(`${name} took ${measure.duration} ms`);
 		}
 	};
 }
