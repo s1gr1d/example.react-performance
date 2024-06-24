@@ -2,6 +2,16 @@ import { useState, useEffect, FC } from "react";
 import { dummyApi, DummyData } from "../utils/dummyApi";
 import { Item, ItemProps } from "./Item.tsx";
 import { ListInfo } from "./ListInfo.tsx";
+import { measureInteractionWithMark } from "../utils/measureInteraction.ts";
+
+const filterItems = (allItems: ItemProps[], searchTerm: string) => {
+	const interaction = measureInteractionWithMark("Filter Items");
+	const filtered = allItems.filter((item) => {
+		return item.name.toLowerCase().includes(searchTerm.toLowerCase());
+	});
+	interaction.end();
+	return filtered;
+};
 
 export const NonPerformantList: FC = () => {
 	const [allItems, setAllItems] = useState<ItemProps[]>([]);
@@ -13,9 +23,7 @@ export const NonPerformantList: FC = () => {
 		});
 	}, []);
 
-	const filteredItems = allItems.filter((item) => {
-		return item.name.toLowerCase().includes(searchTerm.toLowerCase());
-	});
+	const filteredItems = filterItems(allItems, searchTerm);
 
 	// Counter Button State
 	const [counter, setCounter] = useState(0);
@@ -35,7 +43,9 @@ export const NonPerformantList: FC = () => {
 				name="search term"
 				value={searchTerm}
 				onChange={(e) => {
+					const interaction = measureInteractionWithMark("Search Item");
 					setSearchTerm(e.target.value);
+					requestAnimationFrame(() => setTimeout(() => interaction.end()));
 				}}
 			/>
 
