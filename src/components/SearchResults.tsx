@@ -11,7 +11,7 @@ const filterItems = (allItems: ItemProps[], searchTerm: string) => {
 	const filtered = allItems.filter((item) => {
 		return item.name.toLowerCase().includes(searchTerm.toLowerCase());
 	});
-	requestAnimationFrame(() => setTimeout(() => interaction.end()));
+	interaction.end();
 	return filtered;
 };
 
