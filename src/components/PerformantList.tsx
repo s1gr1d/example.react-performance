@@ -1,5 +1,4 @@
-import { FC, useState, memo } from "react";
-import { useDebounce } from "../hooks/debounce.ts";
+import { FC, useState, memo, useDeferredValue } from "react";
 import { measureInteractionWithMark } from "../utils/measureInteraction.ts";
 import { CounterButton } from "./CounterButton.tsx";
 import { SearchResults } from "./SearchResults.tsx";
@@ -9,7 +8,8 @@ const MemoizedSearchResults = memo(SearchResults);
 export const PerformantList: FC = () => {
 	const [searchTerm, setSearchTerm] = useState<string>("");
 
-	const debouncedSearchTerm = useDebounce(searchTerm, 500);
+	const deferredSearchTerm = useDeferredValue(searchTerm);
+	const isDeferring = deferredSearchTerm !== searchTerm;
 
 	return (
 		<>
@@ -22,13 +22,15 @@ export const PerformantList: FC = () => {
 				name="search term"
 				value={searchTerm}
 				onChange={(e) => {
-					setSearchTerm(e.target.value);
 					const interaction = measureInteractionWithMark("Search Item");
+					setSearchTerm(e.target.value);
 					requestAnimationFrame(() => setTimeout(() => interaction.end()));
 				}}
 			/>
 
-			<MemoizedSearchResults debouncedSearchTerm={debouncedSearchTerm} />
+			<div>{isDeferring ? "Deferring..." : "Done"}</div>
+
+			<MemoizedSearchResults debouncedSearchTerm={deferredSearchTerm} />
 		</>
 	);
 };

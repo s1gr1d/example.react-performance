@@ -26,7 +26,7 @@ export const ImprovingList: FC = () => {
 
 	return (
 		<>
-			<h1>Improving Performance</h1>
+			<h1>Improving List</h1>
 
 			<button onClick={handleClick}>Count {counter}</button>
 
